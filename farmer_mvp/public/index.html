@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Farmer Advisory</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🌾 Farmer Advisory </h1>
+
+    <div class="card">
+      <label for="qInput">Ask a question</label>
+      <input id="qInput" placeholder="e.g., How to stop leaf spot on tomato?" />
+      <button id="askBtn">Ask</button>
+      <div id="result"></div>
+    </div>
+
+    <div class="card">
+      <h3>Not confident? Submit to expert</h3>
+      <button id="submitExpertBtn">Submit current question</button>
+      <div id="submitMsg"></div>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary>Admin: Add FAQ (demo password: admin)</summary>
+        <input id="adminPwd" placeholder="admin password" type="password" />
+        <input id="adminQ" placeholder="Question" />
+        <textarea id="adminA" placeholder="Answer"></textarea>
+        <input id="adminCrop" placeholder="Crop (optional)" />
+        <input id="adminTags" placeholder="Tags (comma separated)" />
+        <button id="addFaqBtn">Add FAQ</button>
+        <div id="adminMsg"></div>
+      </details>
+    </div>
+
+    <footer>Open the browser console for debug messages.</footer>
+  </div>
+
+  <!-- Fuse.js for fuzzy search -->
+  <script src="https://unpkg.com/fuse.js@6.6.2/dist/fuse.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
