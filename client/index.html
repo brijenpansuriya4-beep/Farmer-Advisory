@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Krishi Officer - കൃഷി ഓഫീസർ</title>
+    <style>
+        :root {
+            --primary-color: #2e7d32; /* Rich green representing Kerala's vegetation */
+            --secondary-color: #8d6e63; /* Earthy brown representing soil */
+            --accent-color: #ffa000; /* Golden yellow for highlights */
+            --light-green: #e8f5e9; /* Very light green for backgrounds */
+            --dark-green: #1b5e20; /* Dark green for contrasts */
+            --text-color: #333;
+            --light-text: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans Malayalam', 'Noto Sans', 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-green);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--dark-green));
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(46, 125, 50, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .language-selector {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .language-selector:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .language-selector option {
+            color: black;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        
+        .query-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(46, 125, 50, 0.2);
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            border-top: 4px solid var(--accent-color);
+        }
+        
+        .query-tabs {
+            display: flex;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .tab:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .input-container {
+            margin-bottom: 20px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 120px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+        }
+        
+        .voice-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .voice-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .voice-btn:hover {
+            background: var(--dark-green);
+            transform: scale(1.05);
+        }
+        
+        .voice-status {
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        
+        .image-upload {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .image-upload:hover {
+            border-color: var(--primary-color);
+            background-color: #f9f9f9;
+        }
+        
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--light-text);
+            margin-bottom: 10px;
+        }
+        
+        .context-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .context-fields select, .context-fields input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border 0.3s;
+        }
+        
+        .context-fields select:focus, .context-fields input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+        }
+        
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .submit-btn:hover {
+            background: var(--dark-green);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .response-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(46, 125, 50, 0.2);
+            margin-top: 30px;
+            display: none;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .response-content {
+            line-height: 1.8;
+        }
+        
+        .escalate-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .escalate-btn:hover {
+            background: #6d4c41;
+        }
+        
+        .features {
+            padding: 60px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid var(--primary-color);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            background: linear-gradient(to right, var(--primary-color), var(--dark-green));
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .context-fields {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Loading animation */
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .loader-dots {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 20px;
+        }
+        
+        .loader-dots div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+        
+        .loader-dots div:nth-child(1) {
+            left: 8px;
+            animation: loader-dots1 0.6s infinite;
+        }
+        
+        .loader-dots div:nth-child(2) {
+            left: 8px;
+            animation: loader-dots2 0.6s infinite;
+        }
+        
+        .loader-dots div:nth-child(3) {
+            left: 32px;
+            animation: loader-dots2 0.6s infinite;
+        }
+        
+        .loader-dots div:nth-child(4) {
+            left: 56px;
+            animation: loader-dots3 0.6s infinite;
+        }
+        
+        @keyframes loader-dots1 {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes loader-dots3 {
+            0% { transform: scale(1); }
+            100% { transform: scale(0); }
+        }
+        
+        @keyframes loader-dots2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(24px, 0); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- The rest of your HTML content remains exactly the same -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span class="logo-icon">🌱</span>
+                <h1 data-lang="ml">Digital Krishi Officer</h1>
+                <h1 data-lang="en" style="display: none;">Digital Krishi Officer</h1>
+                <h1 data-lang="hi" style="display: none;">डिजिटल कृषि अधिकारी</h1>
+            </div>
+            <nav>
+    <ul>
+        <li><a href="#" data-lang="ml">മുഖ്യപേജ്</a><a href="#" data-lang="en" style="display: none;">Home</a><a href="#" data-lang="hi" style="display: none;">मुखपृष्ठ</a></li>
+        <li><a href="advisories.html" data-lang="ml">ഉപദേശങ്ങൾ</a><a href="advisories.html" data-lang="en" style="display: none;">Advisories</a><a href="advisories.html" data-lang="hi" style="display: none;">सलाह</a></li>
+        <li><a href="crop-calendar.html" data-lang="ml">കൃഷി കലണ്ടർ</a><a href="crop-calendar.html" data-lang="en" style="display: none;">Crop Calendar</a><a href="crop-calendar.html" data-lang="hi" style="display: none;">फसल कैलेंडर</a></li>
+        <li><a href="schemes.html" data-lang="ml">പദ്ധതികൾ</a><a href="schemes.html" data-lang="en" style="display: none;">Schemes</a><a href="schemes.html" data-lang="hi" style="display: none;">योजनाएं</a></li>
+        <li><a href="market-price.html" data-lang="ml">വിപണി വില</a><a href="market-price.html" data-lang="en" style="display: none;">Market Prices</a><a href="market-price.html" data-lang="hi" style="display: none;">बाजार मूल्य</a></li>
+        <li><a href="contact.html" data-lang="ml">ബന്ധപ്പെടുക</a><a href="contact.html" data-lang="en" style="display: none;">Contact</a><a href="contact.html" data-lang="hi" style="display: none;">संपर्क</a></li>
+    </ul>
+</nav>
+            
+        <select class="language-selector" id="language-selector"> <option value="ml" selected>മലയാളം</option> <option value="en">English</option> <option value="hi">हिंदी</option> </select>
+
+
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h2 data-lang="ml">വിദഗ്ധ കൃഷി ഉപദേശം നിങ്ങളുടെ വിരലുകളിൽ</h2>
+            <h2 data-lang="en" style="display: none;">Expert Farming Advice at Your Fingertips</h2>
+            <h2 data-lang="hi" style="display: none;">आपकी उंगलियों पर विशेषज्ञ कृषि सलाह</h2>
+            
+            <p data-lang="ml">നിങ്ങളുടെ കൃഷി സംബന്ധിച്ച എല്ലാ ചോദ്യങ്ങൾക്കും മലയാളത്തിൽ ഉടനെ ഉത്തരം ലഭിക്കും</p>
+            <p data-lang="en" style="display: none;">Get immediate answers to all your farming questions in your preferred language</p>
+            <p data-lang="hi" style="display: none;">अपनी पसंदीदा भाषा में अपने सभी कृषि प्रश्नों के तुरंत उत्तर प्राप्त करें</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="query-container">
+            <div class="query-tabs">
+                <div class="tab active" data-tab="text" data-lang="ml">എഴുത്ത് വഴി</div>
+                <div class="tab active" data-tab="text" data-lang="en" style="display: none;">Text Input</div>
+                <div class="tab active" data-tab="text" data-lang="hi" style="display: none;">टेक्स्ट इनपुट</div>
+                
+                <div class="tab" data-tab="voice" data-lang="ml">ശബ്ദം വഴി</div>
+                <div class="tab" data-tab="voice" data-lang="en" style="display: none;">Voice Input</div>
+                <div class="tab" data-tab="voice" data-lang="hi" style="display: none;">वॉइस इनपुट</div>
+                
+                <div class="tab" data-tab="image" data-lang="ml">ചിത്രം വഴി</div>
+                <div class="tab" data-tab="image" data-lang="en" style="display: none;">Image Input</div>
+                <div class="tab" data-tab="image" data-lang="hi" style="display: none;">इमेज इनपुट</div>
+            </div>
+
+            <div class="input-container" id="text-input">
+                <textarea placeholder="നിങ്ങളുടെ കൃഷി സംബന്ധമായ ചോദ്യം ഇവിടെ എഴുതുക... ഉദാ: എന്റെ വാഴത്തിലെ ഇലപ്പുള്ളിക്ക് എന്ത് മരുന്ന് ഉപയോഗിക്കണം?" data-lang="ml"></textarea>
+                <textarea placeholder="Type your farming-related question here... Ex: Which pesticide should I use for leaf spot in my banana plants?" data-lang="en" style="display: none;"></textarea>
+                <textarea placeholder="अपना कृषि संबंधी प्रश्न यहाँ टाइप करें... उदा: मेरे केले के पौधों में पत्ती के धब्बों के लिए मुझे कौन सा कीटनाशक उपयोग करना चाहिए?" data-lang="hi" style="display: none;"></textarea>
+                
+                <div class="voice-input">
+                    <button class="voice-btn" id="voice-to-text">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <span class="voice-status" id="voice-status" data-lang="ml">മൈക്ക് ക്ലിക്ക് ചെയ്ത് ശബ്ദത്തിൽ ചോദ്യം ചോദിക്കാം</span>
+                    <span class="voice-status" id="voice-status" data-lang="en" style="display: none;">Click mic to ask question by voice</span>
+                    <span class="voice-status" id="voice-status" data-lang="hi" style="display: none;">आवाज में प्रश्न पूछने के लिए माइक पर क्लिक करें</span>
+                </div>
+            </div>
+
+            <div class="input-container" id="image-input" style="display: none;">
+                <div class="image-upload" id="image-upload-area">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p data-lang="ml">രോഗം ബാധിച്ച ചെടിയുടെ ഫോട്ടോ അപ്‌ലോഡ് ചെയ്യുക</p>
+                    <p data-lang="en" style="display: none;">Upload photo of diseased crop</p>
+                    <p data-lang="hi" style="display: none;">रोगग्रस्त फसल की फोटो अपलोड करें</p>
+                    <input type="file" accept="image/*" style="display: none;" id="image-file">
+                </div>
+                
+                <textarea placeholder="ചിത്രത്തെക്കുറിച്ച് അധിക വിവരങ്ങൾ (ഓപ്ഷണൽ)..." id="image-caption" data-lang="ml"></textarea>
+                <textarea placeholder="Additional details about the image (optional)..." id="image-caption" data-lang="en" style="display: none;"></textarea>
+                <textarea placeholder="छवि के बारे में अतिरिक्त विवरण (वैकल्पिक)..." id="image-caption" data-lang="hi" style="display: none;"></textarea>
+            </div>
+
+            <div class="context-fields">
+                <div>
+                    <label for="crop-type" data-lang="ml">പയർവർഗ്ഗം</label>
+                    <label for="crop-type" data-lang="en" style="display: none;">Crop Type</label>
+                    <label for="crop-type" data-lang="hi" style="display: none;">फसल प्रकार</label>
+                    
+                    <select id="crop-type">
+                        <option value="" selected>Select</option>
+                        <option value="paddy(rice)">Rice</option>
+                        <option value="coconut">Coconut</option>
+                        <option value="banana">Banana</option>
+                        <option value="rubber">Rubber</option>
+                        <option value="spices">Spices</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="district" data-lang="ml">ജില്ല</label>
+                    <label for="district" data-lang="en" style="display: none;">District</label>
+                    <label for="district" data-lang="hi" style="display: none;">जिला</label>
+                    
+                    <select id="district">
+                        <option value="" selected>Select</option>
+                        <option value="thiruvananthapuram">Thiruvananthapuram</option>
+                        <option value="kollam">Kollam</option>
+                        <option value="alappuzha">Alappuzha</option>
+                        <option value="pathanamthitta">Pathanamthitta</option>
+                        <option value="kottayam">Kottayam</option>
+                        <option value="idukki">Idukki</option>
+                        <option value="ernakulam">Ernakulam</option>
+                        <option value="thrissur">Thrissur</option>
+                        <option value="palakkad">Palakkad</option>
+                        <option value="malappuram">Malappuram</option>
+                        <option value="kozhikode">Kozhikode</option>
+                        <option value="wayanad">Wayanad</option>
+                        <option value="kannur">Kannur</option>
+                        <option value="kasargod">Kasargod</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="season" data-lang="ml">സീസൻ</label>
+                    <label for="season" data-lang="en" style="display: none;">Season</label>
+                    <label for="season" data-lang="hi" style="display: none;">मौसम</label>
+                    
+                    <select id="season">
+                        <option value="" selected>Select</option>
+                        <option value="virippu">Virippu (April-May to September-October)</option>
+                        <option value="mundakan">Mundakan (September-October to December-January)</option>
+                        <option value="puncha">puncha (October-November to February-March)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="submit-btn" id="submit-query">
+                <i class="fas fa-paper-plane"></i>
+                <span data-lang="ml">ഉത്തരം ലഭിക്കുക</span>
+                <span data-lang="en" style="display: none;">Get Answer</span>
+                <span data-lang="hi" style="display: none;">उत्तर प्राप्त करें</span>
+            </button>
+
+            <div class="loader" id="loader">
+                <div class="loader-dots">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <p data-lang="ml">നിങ്ങളുടെ ചോദ്യം വിശകലനം ചെയ്യുന്നു...</p>
+                <p data-lang="en" style="display: none;">Analyzing your question...</p>
+                <p data-lang="hi" style="display: none;">आपके प्रश्न का विश्लेषण किया जा रहा है...</p>
+            </div>
+        </div>
+
+        <div class="response-container" id="response-container">
+            <div class="response-header">
+                <h3 data-lang="ml">ഞങ്ങളുടെ ഉത്തരം</h3>
+                <h3 data-lang="en" style="display: none;">Our Response</h3>
+                <h3 data-lang="hi" style="display: none;">हमारा जवाब</h3>
+                
+                <button class="escalate-btn" id="escalate-btn">
+                    <i class="fas fa-user-tie"></i>
+                    <span data-lang="ml">കൃഷി ഓഫീസറിലേക്ക് അയയ്ക്കുക</span>
+                    <span data-lang="en" style="display: none;">Send to Agri Officer</span>
+                    <span data-lang="hi" style="display: none;">कृषि अधिकारी को भेजें</span>
+                </button>
+            </div>
+            <div class="response-content" id="response-content">
+                <!-- Response will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title" data-lang="ml">സവിശേഷതകൾ</h2>
+            <h2 class="section-title" data-lang="en" style="display: none;">Features</h2>
+            <h2 class="section-title" data-lang="hi" style="display: none;">विशेषताएं</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3 data-lang="ml">സ്വദേശി ഭാഷാ പിന്തുണ</h3>
+                    <h3 data-lang="en" style="display: none;">Native Language Support</h3>
+                    <h3 data-lang="hi" style="display: none;">मातृभाषा समर्थन</h3>
+                    
+                    <p data-lang="ml">നിങ്ങളുടെ സ്വഭാഷയിൽ ചോദ്യങ്ങൾ ചോദിക്കാനും ഉത്തരങ്ങൾ ലഭിക്കാനും</p>
+                    <p data-lang="en" style="display: none;">Ask questions and get answers in your native language</p>
+                    <p data-lang="hi" style="display: none;">अपनी मातृभाषा में प्रश्न पूछें और उत्तर प्राप्त करें</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3 data-lang="ml">ശബ്ദ ഇൻപുട്ട്</h3>
+                    <h3 data-lang="en" style="display: none;">Voice Input</h3>
+                    <h3 data-lang="hi" style="display: none;">आवाज इनपुट</h3>
+                    
+                    <p data-lang="ml">എഴുത്തിൽ പരിജ്ഞാനമില്ലാത്തവർക്കും ശബ്ദത്തിൽ ചോദ്യങ്ങൾ ചോദിക്കാം</p>
+                    <p data-lang="en" style="display: none;">Ask questions by voice for those who can't read or write</p>
+                    <p data-lang="hi" style="display: none;">उनके लिए आवाज में प्रश्न पूछें जो पढ़-लिख नहीं सकते</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 data-lang="ml">ചിത്രം വഴി വിശകലനം</h3>
+                    <h3 data-lang="en" style="display: none;">Image Analysis</h3>
+                    <h3 data-lang="hi" style="display: none;">छवि विश्लेषण</h3>
+                    
+                    <p data-lang="ml">രോഗം ബാധിച്ച ചെടിയുടെ ഫോട്ടോ അപ്‌ലോഡ് ചെയ്ത് രോഗം തിരിച്ചറിയാം</p>
+                    <p data-lang="en" style="display: none;">Upload photos of diseased plants to identify the disease</p>
+                    <p data-lang="hi" style="display: none;">रोगग्रस्त पौधों की फोटो अपलोड करके रोग की पहचान करें</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-lang="ml">Digital Krishi Officer</h3>
+                    <h3 data-lang="en" style="display: none;">Digital Krishi Officer</h3>
+                    <h3 data-lang="hi" style="display: none;">डिजिटल कृषि अधिकारी</h3>
+                    
+                    <p data-lang="ml">കർഷകരുടെ എല്ലാ പ്രശ്നങ്ങൾക്കും സമഗ്രമായ പരിഹാരങ്ങൾ നൽകുന്ന ഒരു ഡിജിറ്റൽ പ്ലാറ്റ്ഫോം</p>
+                    <p data-lang="en" style="display: none;">A digital platform providing comprehensive solutions to all farmer problems</p>
+                    <p data-lang="hi" style="display: none;">किसानों की सभी समस्याओं का व्यापक समाधान प्रदान करने वाला एक डिजिटल प्लेटफॉर्म</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang="ml">ബന്ധപ്പെടുക</h3>
+                    <h3 data-lang="en" style="display: none;">Contact Us</h3>
+                    <h3 data-lang="hi" style="display: none;">संपर्क करें</h3>
+                    
+                    <p data-lang="ml">കൃഷി വികസന ഓഫീസ്</p>
+                    <p data-lang="en" style="display: none;">Agriculture Development Office</p>
+                    <p data-lang="hi" style="display: none;">कृषि विकास कार्यालय</p>
+                    
+                    <p data-lang="ml">തിരുവनന്തപുരം</p>
+                    <p data-lang="en" style="display: none;">Thiruvananthapuram</p>
+                    <p data-lang="hi" style="display: none;">तिरुवनंतपुरम</p>
+                    
+                    <p data-lang="ml">ഫോൺ: 0471-1234567</p>
+                    <p data-lang="en" style="display: none;">Phone: 0471-1234567</p>
+                    <p data-lang="hi" style="display: none;">फोन: 0471-1234567</p>
+                    
+                    <p data-lang="ml">ഇമെയിൽ: support@krishiofficer.kerala.gov.in</p>
+                    <p data-lang="en" style="display: none;">Email: support@krishiofficer.kerala.gov.in</p>
+                    <p data-lang="hi" style="display: none;">ईमेल: support@krishiofficer.kerala.gov.in</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang="ml">പ്രധാന ലിങ്കുകൾ</h3>
+                    <h3 data-lang="en" style="display: none;">Important Links</h3>
+                    <h3 data-lang="hi" style="display: none;">महत्वपूर्ण लिंक</h3>
+                    
+                    <p><a href="#" style="color: white;" data-lang="ml">കേരള കൃഷി വിഭാഗം</a><a href="#" style="color: white; display: none;" data-lang="en">Kerala Agriculture Department</a><a href="#" style="color: white; display: none;" data-lang="hi">केरल कृषि विभाग</a></p>
+                    <p><a href="#" style="color: white;" data-lang="ml">കർഷക സഹായ പദ്ധതികൾ</a><a href="#" style="color: white; display: none;" data-lang="en">Farmer Assistance Schemes</a><a href="#" style="color: white; display: none;" data-lang="hi">किसान सहायता योजनाएं</a></p>
+                    <p><a href="#" style="color: white;" data-lang="ml">വിപണന സാധ്യതകൾ</a><a href="#" style="color: white; display: none;" data-lang="en">Marketing Opportunities</a><a href="#" style="color: white; display: none;" data-lang="hi">विपणन अवसर</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p data-lang="ml">&copy; 2025 Digital Krishi Officer. എല്ലാ അവകാശങ്ങളും സംരക്ഷിച്ചിരിക്കുന്നു.</p>
+                <p data-lang="en" style="display: none;">&copy; 2025 Digital Krishi Officer. All rights reserved.</p>
+                <p data-lang="hi" style="display: none;">&copy; 2025 डिजिटल कृषि अधिकारी। सर्वाधिकार सुरक्षित।</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Your existing JavaScript code remains exactly the same
+        document.addEventListener('DOMContentLoaded', function() {
+    // --- STATE MANAGEMENT ---
+    let currentLanguage = 'ml'; // Default language is Malayalam
+
+    // --- ELEMENT SELECTORS ---
+    const languageSelector = document.getElementById('language-selector');
+    const allLanguageElements = document.querySelectorAll('[data-lang]');
+    const tabs = document.querySelectorAll('.tab');
+    const textInputContainer = document.getElementById('text-input');
+    const imageInputContainer = document.getElementById('image-input');
+    const imageUploadArea = document.getElementById('image-upload-area');
+    const imageFileInput = document.getElementById('image-file');
+    const voiceBtn = document.getElementById('voice-to-text');
+    const voiceStatusElements = document.querySelectorAll('.voice-status'); // Correctly select all status elements
+    const textQueryTextarea = document.querySelector(`#text-input textarea[data-lang="ml"]`);
+    const submitBtn = document.getElementById('submit-query');
+    const loader = document.getElementById('loader');
+    const responseContainer = document.getElementById('response-container');
+    const responseContent = document.getElementById('response-content');
+    const escalateBtn = document.getElementById('escalate-btn');
+
+    // --- LANGUAGE SWITCHING LOGIC ---
+    function setLanguage(newLanguage) {
+        allLanguageElements.forEach(el => {
+            if (el.dataset.lang === newLanguage) {
+                // Use 'block' for block-level elements and 'inline' for others if needed, '' is safer
+                el.style.display = ''; 
+            } else {
+                el.style.display = 'none';
+            }
+        });
+        currentLanguage = newLanguage;
+        updateVoiceRecognitionLanguage(newLanguage);
+    }
+
+    languageSelector.addEventListener('change', function() {
+        setLanguage(this.value);
+    });
+
+    // --- TAB SWITCHING LOGIC ---
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Only handle clicks on tabs for the current language
+            if (tab.getAttribute('data-lang') !== currentLanguage) return;
+
+            // Deactivate all tabs for the current language
+            document.querySelectorAll(`.tab[data-lang="${currentLanguage}"]`).forEach(t => t.classList.remove('active'));
+            
+            // Activate the clicked tab
+            tab.classList.add('active');
+
+            const tabType = tab.dataset.tab;
+
+            if (tabType === 'image') {
+                textInputContainer.style.display = 'none';
+                imageInputContainer.style.display = 'block';
+            } else { // Covers 'text' and 'voice'
+                textInputContainer.style.display = 'block';
+                imageInputContainer.style.display = 'none';
+            }
+        });
+    });
+
+    // --- IMAGE UPLOAD LOGIC ---
+    imageUploadArea.addEventListener('click', () => imageFileInput.click());
+
+    imageFileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            const fileName = this.files[0].name;
+            const pElement = imageUploadArea.querySelector(`p[data-lang="${currentLanguage}"]`);
+            if (pElement) {
+                pElement.textContent = `${currentLanguage === 'ml' ? 'തിരഞ്ഞെടുത്തു: ' : currentLanguage === 'hi' ? 'चयनित: ' : 'Selected: '}${fileName}`;
+            }
+        }
+    });
+
+    // --- VOICE INPUT (SPEECH RECOGNITION) LOGIC ---
+    let recognition;
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+        recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onstart = () => {
+            const statusText = currentLanguage === 'ml' ? 'കേൾക്കുന്നു... ഇപ്പോൾ പറയുക' :
+                               currentLanguage === 'hi' ? 'सुन रहा हूँ... अब बोलें' :
+                               'Listening... Speak now';
+            voiceStatusElements.forEach(el => {
+                if(el.dataset.lang === currentLanguage) el.textContent = statusText;
+            });
+            voiceBtn.innerHTML = '<i class="fas fa-stop-circle"></i>';
+            voiceBtn.style.backgroundColor = '#f44336';
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            const activeTextarea = document.querySelector(`#text-input textarea[data-lang="${currentLanguage}"]`);
+            if(activeTextarea) activeTextarea.value = transcript;
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Speech recognition error:', event.error);
+            const statusText = currentLanguage === 'ml' ? 'ഒരു പിശക് സംഭവിച്ചു, വീണ്ടും ശ്രമിക്കുക' :
+                               currentLanguage === 'hi' ? 'एक त्रुटि हुई, कृपया पुनः प्रयास करें' :
+                               'An error occurred, please try again';
+            voiceStatusElements.forEach(el => {
+                if(el.dataset.lang === currentLanguage) el.textContent = statusText;
+            });
+        };
+
+        recognition.onend = () => {
+            const statusText = currentLanguage === 'ml' ? 'മൈക്ക് ക്ലിക്ക് ചെയ്ത് ശബ്ദത്തിൽ ചോദ്യം ചോദിക്കാം' :
+                               currentLanguage === 'hi' ? 'आवाज में प्रश्न पूछने के लिए माइक पर क्लिक करें' :
+                               'Click mic to ask question by voice';
+            voiceStatusElements.forEach(el => {
+                 if(el.dataset.lang === currentLanguage) el.textContent = statusText;
+            });
+            voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+            voiceBtn.style.backgroundColor = ''; // Revert to default color
+        };
+    } else {
+        voiceBtn.disabled = true;
+        const statusText = currentLanguage === 'ml' ? 'ഈ ബ്രൗസറിൽ ഈ സൗകര്യം ലഭ്യമല്ല' :
+                           currentLanguage === 'hi' ? 'यह सुविधा इस ब्राउज़र में समर्थित नहीं है' :
+                           'Feature not supported in this browser';
+        voiceStatusElements.forEach(el => {
+             if(el.dataset.lang === currentLanguage) el.textContent = statusText;
+        });
+    }
+
+    function updateVoiceRecognitionLanguage(lang) {
+        if (recognition) {
+            const langCode = { ml: 'ml-IN', en: 'en-IN', hi: 'hi-IN' };
+            recognition.lang = langCode[lang] || 'en-IN';
+        }
+    }
+    
+    voiceBtn.addEventListener('click', () => {
+        if (recognition) {
+            try {
+                recognition.start();
+            } catch(e) {
+                console.error("Could not start recognition:", e);
+            }
+        }
+    });
+
+    // --- FORM SUBMISSION (API CALL) LOGIC ---
+    submitBtn.addEventListener('click', async () => {
+        let query = '';
+        const activeTab = document.querySelector('.tab.active[data-lang="' + currentLanguage + '"]').dataset.tab;
+        
+        if (activeTab === 'image') {
+            const imageCaptionArea = document.querySelector(`#image-input textarea[data-lang="${currentLanguage}"]`);
+            query = imageCaptionArea.value.trim();
+            // In a real app, you would also handle the imageFileInput.files[0] here
+            if (!query && !imageFileInput.files[0]) {
+                 alert(currentLanguage === 'ml' ? 'ദയവായി ഒരു ചിത്രമെങ്കിലും അപ്‌ലോഡ് ചെയ്യുക അല്ലെങ്കിൽ വിവരണം നൽകുക' :
+                       currentLanguage === 'hi' ? 'कृपया एक छवि अपलोड करें या एक विवरण प्रदान करें' :
+                       'Please upload an image or provide a description');
+                 return;
+            }
+        } else {
+            const activeTextarea = document.querySelector(`#text-input textarea[data-lang="${currentLanguage}"]`);
+            query = activeTextarea.value.trim();
+        }
+
+        if (!query) {
+            alert(currentLanguage === 'ml' ? 'ദയവായി ഒരു ചോദ്യം എഴുതുക' :
+                  currentLanguage === 'hi' ? 'कृपया कोई प्रश्न टाइप करें' :
+                  'Please type a question');
+            return;
+        }
+
+        const cropType = document.getElementById('crop-type').value;
+        const district = document.getElementById('district').value;
+        const season = document.getElementById('season').value;
+
+        loader.style.display = 'block';
+        responseContainer.style.display = 'none';
+
+        try {
+            // This is the REAL API Call to your local server
+            const apiResponse = await fetch('http://localhost:3000/api/get-advice', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    query: query,
+                    crop: cropType,
+                    district: district,
+                    season: season,
+                    language: currentLanguage
+                }),
+            });
+            
+            if (!apiResponse.ok) {
+                throw new Error(`Server error: ${apiResponse.statusText}`);
+            }
+
+            const data = await apiResponse.json();
+            responseContent.innerHTML = data.answer;
+
+        } catch (error) {
+            console.error('Fetch Error:', error);
+            const errorMsg = currentLanguage === 'ml' ? '<p>ക്ഷമിക്കണം, ഒരു പിശക് സംഭവിച്ചു. സെർവറുമായി ബന്ധിപ്പിക്കാൻ കഴിഞ്ഞില്ല.</p>' :
+                             currentLanguage === 'hi' ? '<p>क्षमा करें, कोई त्रुटि हुई। सर्वर से कनेक्ट नहीं हो सका।</p>' :
+                             '<p>Sorry, something went wrong. Could not connect to the server.</p>';
+            responseContent.innerHTML = errorMsg;
+        } finally {
+            loader.style.display = 'none';
+            responseContainer.style.display = 'block';
+        }
+    });
+
+    // --- ESCALATE BUTTON LOGIC ---
+    escalateBtn.addEventListener('click', () => {
+        // In a real app, this would trigger another API call to save the query to a database.
+        const message = currentLanguage === 'ml' ? 'നിങ്ങളുടെ ചോദ്യം കൃഷി ഓഫീസർക്ക് അയച്ചിരിക്കുന്നു. 24 മണിക്കൂറിനുള്ളിൽ നിങ്ങൾക്ക് മറുപടി ലഭിക്കും.' :
+                      currentLanguage === 'hi' ? 'आपका प्रश्न कृषि अधिकारी को भेज दिया गया है। आपको 24 घंटे के भीतर जवाब मिल जाएगा।' :
+                      'Your question has been sent to the Agriculture Officer. You will receive a response within 24 hours.';
+        alert(message);
+    });
+    
+    // --- INITIALIZATION ---
+    setLanguage('ml'); // Set default language on page load
+    updateVoiceRecognitionLanguage('ml'); // Set default voice language
+});
+
+    </script>
+</body>
+</html>

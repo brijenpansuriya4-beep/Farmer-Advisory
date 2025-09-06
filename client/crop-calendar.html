@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Calendar - Digital Krishi Officer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50; --secondary-color: #FFC107; --dark-green: #2E7D32;
+            --light-green: #E8F5E9; --text-color: #333; --light-text: #666;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans Malayalam', 'Roboto', sans-serif; }
+        body { background-color: #f5f5f5; color: var(--text-color); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(to right, var(--primary-color), var(--dark-green)); color: white; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo h1 { font-size: 1.8rem; }
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav a { color: white; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
+        nav a:hover { opacity: 0.8; }
+        .page-content { background: white; border-radius: 10px; padding: 30px; margin-top: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); min-height: 60vh;}
+        .page-title { color: var(--dark-green); margin-bottom: 20px; border-bottom: 2px solid var(--light-green); padding-bottom: 10px; }
+        #content-area h3 { color: var(--primary-color); margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        table, th, td { border: 1px solid #ccc; }
+        th, td { padding: 10px; text-align: center; }
+        th { background: var(--light-green); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span style="font-size: 2rem;">🌱</span>
+                <h1>Digital Krishi Officer</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./advisories.html">Advisories</a></li>
+                    <li><a href="./crop-calendar.html">Crop Calendar</a></li>
+                    <li><a href="./schemes.html">Schemes</a></li>
+                    <li><a href="./market-prices.html">Market Prices</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-content">
+            <h2 class="page-title">Kerala Crop Calendar (കൃഷി കലണ്ടർ)</h2>
+            <div id="content-area"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const contentArea = document.getElementById('content-area');
+
+            // Static crop calendar table only
+            const staticTable = `
+                <h3>Kerala Crop Calendar</h3>
+                <table>
+                    <tr>
+                        <th>Season / Context</th>
+                        <th>Sowing Period</th>
+                        <th>Harvest Starts (approx.)</th>
+                        <th>Harvest Frequency</th>
+                    </tr>
+                    <tr>
+                        <td>Pre-monsoon / Early Rabi</td>
+                        <td>January – March</td>
+                        <td>March – May</td>
+                        <td>Every 2–3 days</td>
+                    </tr>
+                    <tr>
+                        <td>Early Monsoon</td>
+                        <td>May – June (rainfed)</td>
+                        <td>July – August</td>
+                        <td>Every 2–3 days</td>
+                    </tr>
+                    <tr>
+                        <td>Post-monsoon / Late Rabi</td>
+                        <td>September – December</td>
+                        <td>November – February</td>
+                        <td>Every 2–3 days</td>
+                    </tr>
+                </table>
+            `;
+
+            contentArea.innerHTML = staticTable;
+        });
+    </script>
+</body>
+</html>

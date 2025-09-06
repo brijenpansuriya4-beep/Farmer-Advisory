@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advisories - Digital Krishi Officer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #FFC107;
+            --dark-green: #2E7D32;
+            --light-green: #E8F5E9;
+            --text-color: #333;
+            --light-text: #666;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans Malayalam', 'Roboto', sans-serif; }
+        body { background-color: #f5f5f5; color: var(--text-color); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(to right, var(--primary-color), var(--dark-green)); color: white; padding: 15px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo h1 { font-size: 1.8rem; }
+        nav ul { display: flex; list-style: none; gap: 20px; }
+        nav a { color: white; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
+        nav a:hover { opacity: 0.8; }
+        .page-content { background: white; border-radius: 10px; padding: 30px; margin-top: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); min-height: 60vh;}
+        .page-title { color: var(--dark-green); margin-bottom: 20px; border-bottom: 2px solid var(--light-green); padding-bottom: 10px; }
+        #content-area h3 { color: var(--primary-color); margin-top: 20px; }
+
+        /* Crop advisory styles */
+        .crop-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+            background-color: white;
+        }
+        .crop-card:hover { transform: translateY(-5px); }
+        .crop-header {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .crop-body { padding: 20px; }
+        .info-item {
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #e0e0e0;
+            padding-bottom: 15px;
+        }
+        .info-title { font-weight: bold; color: #2e7d32; margin-bottom: 5px; }
+        .nav-pills .nav-link.active { background-color: #2e7d32; }
+        .nav-pills .nav-link { color: #2e7d32; }
+        .advisory-footer {
+            background-color: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <span style="font-size: 2rem;">🌱</span>
+                <h1>Digital Krishi Officer</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./advisories.html">Advisories</a></li>
+                    <li><a href="./crop-calendar.html">Crop Calendar</a></li>
+                    <li><a href="./schemes.html">Schemes</a></li>
+                    <li><a href="./market-prices.html">Market Prices</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="page-content">
+            <h2 class="page-title">Agricultural Advisories (കാർഷിക ഉപദേശങ്ങൾ)</h2>
+            <div id="content-area">
+                <!-- Crop Advisory Tabs -->
+                <ul class="nav nav-pills mb-4 justify-content-center" id="cropTabs" role="tablist">
+                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#coconut">Coconut</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#rubber">Rubber</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#spices">Spices</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#rice">Rice</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#banana">Banana</button></li>
+                </ul>
+
+                <div class="tab-content" id="cropTabsContent">
+                    <!-- Coconut -->
+                    <div class="tab-pane fade show active" id="coconut">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="crop-card">
+                                    <div class="crop-header">Coconut</div>
+                                    <div class="crop-body">
+                                        <div class="info-item"><div class="info-title">Planting</div><p>Plant during monsoon season (May-June)...</p></div>
+                                        <div class="info-item"><div class="info-title">Soil</div><p>Well-drained laterite, alluvial, or sandy soils...</p></div>
+                                        <div class="info-item"><div class="info-title">Fertilizer</div><p>Apply 0.5 kg urea, 1.5 kg super phosphate...</p></div>
+                                        <div class="info-item"><div class="info-title">Harvesting Time</div><p>Matures in 12 months after flowering...</p></div>
+                                        <div class="info-item"><div class="info-title">Watering</div><p>Requires regular watering especially in summer...</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rubber -->
+                    <div class="tab-pane fade" id="rubber">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="crop-card">
+                                    <div class="crop-header">Rubber</div>
+                                    <div class="crop-body">
+                                        <div class="info-item"><div class="info-title">Planting</div><p>Plant at beginning of rainy season (June-July)...</p></div>
+                                        <div class="info-item"><div class="info-title">Soil</div><p>Deep, well-drained lateritic soils...</p></div>
+                                        <div class="info-item"><div class="info-title">Fertilizer</div><p>Apply 10 kg compost in first year...</p></div>
+                                        <div class="info-item"><div class="info-title">Harvesting Time</div><p>Tapping starts when tree girth reaches 50 cm...</p></div>
+                                        <div class="info-item"><div class="info-title">Watering</div><p>Needs regular watering during establishment...</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spices -->
+                    <div class="tab-pane fade" id="spices">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="crop-card">
+                                    <div class="crop-header">Spices (Pepper, Cardamom, etc.)</div>
+                                    <div class="crop-body">
+                                        <div class="info-item"><div class="info-title">Planting</div><p>Pepper: rooted cuttings during monsoon...</p></div>
+                                        <div class="info-item"><div class="info-title">Soil</div><p>Well-drained organic soils suitable...</p></div>
+                                        <div class="info-item"><div class="info-title">Fertilizer</div><p>Pepper: 10 kg FYM + 500g N...</p></div>
+                                        <div class="info-item"><div class="info-title">Harvesting Time</div><p>Pepper: 6-8 months after flowering...</p></div>
+                                        <div class="info-item"><div class="info-title">Watering</div><p>Needs regular moisture, avoid waterlogging...</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rice -->
+                    <div class="tab-pane fade" id="rice">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="crop-card">
+                                    <div class="crop-header">Rice</div>
+                                    <div class="crop-body">
+                                        <div class="info-item"><div class="info-title">Planting</div><p>Transplant 21-25 day seedlings in main seasons...</p></div>
+                                        <div class="info-item"><div class="info-title">Soil</div><p>Clay loam to clay soils ideal...</p></div>
+                                        <div class="info-item"><div class="info-title">Fertilizer</div><p>Apply 100:50:50 kg/ha NPK...</p></div>
+                                        <div class="info-item"><div class="info-title">Harvesting Time</div><p>Harvest when 80% panicles turn straw color...</p></div>
+                                        <div class="info-item"><div class="info-title">Watering</div><p>Requires standing water 2-5 cm initially...</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banana -->
+                    <div class="tab-pane fade" id="banana">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="crop-card">
+                                    <div class="crop-header">Banana</div>
+                                    <div class="crop-body">
+                                        <div class="info-item"><div class="info-title">Planting</div><p>Plant during April-May or Sept-Oct...</p></div>
+                                        <div class="info-item"><div class="info-title">Soil</div><p>Deep, well-drained loamy soils rich in organic matter...</p></div>
+                                        <div class="info-item"><div class="info-title">Fertilizer</div><p>Apply 20g N, 10g P₂O₅, 30g K₂O per plant...</p></div>
+                                        <div class="info-item"><div class="info-title">Harvesting Time</div><p>Harvest 12-15 months after planting...</p></div>
+                                        <div class="info-item"><div class="info-title">Watering</div><p>Requires frequent watering weekly or biweekly...</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="advisory-footer">
+                    <p>Kerala Agricultural Department &copy; 2025. For more information, contact your local Krishi Bhavan.</p>
+                    <p>Note: These are general guidelines. Specific recommendations may vary based on local conditions and varieties.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
